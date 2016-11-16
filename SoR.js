@@ -11,6 +11,8 @@ var SoR = {
     var equationToEval = document.getElementById('equation').value;
     var a = parseInt($('#minX').val());
     var b = parseInt($('#maxX').val());
+    SoR.tempYArr1 = [];
+    SoR.tempYArr2 = [];
     var xVal = a;
     for (var i = 0; i <= SoR.size * (b - a); i++) {
       SoR.tempYArr1.push(SoR.evaluateEquation(xVal, equationToEval));
