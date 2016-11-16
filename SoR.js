@@ -36,7 +36,7 @@ var SoR = {
     var prevYVal = 0;
     for (var i = 0; i < SoR.size * (b - a); i++) {
       tempY = SoR.tempYArr2[count] * (1 / SoR.size);
-      console.log(SoR.evaluateEquation(xVal, equationToEval) * (1 / size)));
+      console.log(SoR.evaluateEquation(xVal, equationToEval) * (1 / size));
       console.log("tempY" + tempY);
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
