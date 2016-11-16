@@ -1,5 +1,6 @@
 var SoR = {
-  tempYArr: [],
+  tempYArr1: [],
+  tempYArr2: [],
   size: 500,
 
   evaluateEquation: function(x, equationToEval) {
@@ -11,8 +12,13 @@ var SoR = {
     var b = parseInt($('#maxX').val());
     var xVal = a;
     for (var i = 0; i <= SoR.size * (b - a); i++) {
-      SoR.tempYArr.push(SoR.evaluateEquation(xVal, equationToEval));
+      SoR.tempYArr1.push(SoR.evaluateEquation(xVal, equationToEval));
       xVal = xVal + (1 / SoR.size);
+    }
+    var xVal = a;
+    for (var i = 0; i <= SoR.size * (b - a); i++) {
+      SoR.tempYArr2.push(SoR.evaluateEquation(xVal, equationToEval));
+      xVal = xVal - (1 / SoR.size);
     }
   },
 
@@ -24,10 +30,10 @@ var SoR = {
     var b = parseInt($('#maxX').val());
     var xVal = b;
     var tempY = 0;
-    var count = SoR.size * (b - a);
+    var count = 0;
     var prevYVal = 0;
     for (var i = 0; i < SoR.size * (b - a); i++) {
-      tempY = SoR.tempYArr[count] * (1 / SoR.size);
+      tempY = SoR.tempYArr2[count] * (1 / SoR.size);
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
@@ -47,7 +53,7 @@ var SoR = {
       }
       xVal = xVal - (1 / SoR.size);
       prevYVal = tempY;
-      count--;
+      count++;
     }
     tempY = 0;
     var prevYVal = 0;
@@ -56,7 +62,7 @@ var SoR = {
     xVal = a;
     if (integralValue != "diverges") {
       for (var i = 0; i < SoR.size * (b - a); i++) {
-        tempY = SoR.tempYArr[count] * (1 / SoR.size);
+        tempY = SoR.tempYArr1[count] * (1 / SoR.size);
 
         // temporary += parseFloat(tempY.toFixed(6));
         // xVal = xVal + (1 / SoR.size);
@@ -104,9 +110,9 @@ var SoR = {
     var xVal = b;
     var tempY = 0;
     var prevYVal = 0;
-    var count = SoR.size * (b - a) - 1;
+    var count = 0;
     for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
-      tempY = (((SoR.tempYArr[count] + SoR.evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
+      tempY = (((SoR.tempYArr2[count] + SoR.evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
@@ -126,7 +132,7 @@ var SoR = {
       }
       xVal = xVal - (1 / SoR.size);
       prevYVal = tempY;
-      count--;
+      count++;
     }
     tempY = 0;
     var prevYVal = 0;
@@ -135,7 +141,7 @@ var SoR = {
     count = 0;
     if (integralValue != "diverges") {
       for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
-        tempY = (((SoR.tempYArr[count] + SoR.evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
+        tempY = (((SoR.tempYArr1[count] + SoR.evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
 
         // temporary += parseFloat(tempY.toFixed(6));
         // xVal = xVal + (1 / SoR.size);
