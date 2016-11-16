@@ -183,17 +183,17 @@ var SoR = {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   },
 
-  changeInputs: function() {
-    parametric = document.getElementById('parametric').checked;
-    console.log(parametric)
-    if (parametric) {
-      document.getElementById("eqLab1").style.display = 'inline';
-      document.getElementById("eqLab").style.display = 'none';
-    } else {
-      document.getElementById("eqLab1").style.display = 'none';
-      document.getElementById("eqLab").style.display = 'inline';
-    }
-  },
+//   changeInputs: function() {
+//     parametric = document.getElementById('parametric').checked;
+//     console.log(parametric)
+//     if (parametric) {
+//       document.getElementById("eqLab1").style.display = 'inline';
+//       document.getElementById("eqLab").style.display = 'none';
+//     } else {
+//       document.getElementById("eqLab1").style.display = 'none';
+//       document.getElementById("eqLab").style.display = 'inline';
+//     }
+//   },
 
   RenderEquations: function(e) {
     equationToEval = document.getElementById('equation').value;
@@ -205,38 +205,38 @@ var SoR = {
     z1 = [];
     y1 = [];
     x1 = [];
-    parametric = document.getElementById('parametric').checked;
-    if (!parametric) {
-      equation = document.getElementById('equation').value;
-      minX = parseFloat(document.getElementById("minX").value);
-      maxX = parseFloat(document.getElementById("maxX").value);
-      minY = parseFloat(document.getElementById("minY").value);
-      maxY = parseFloat(document.getElementById("maxY").value);
-      minZ = parseFloat(document.getElementById("minZ").value);
-      maxZ = parseFloat(document.getElementById("maxZ").value);
-      iterate = parseFloat(document.getElementById("iterate").value);
-      for (y = minY; y <= maxY; y += iterate) {
-        tempz = [];
-        tempy = [];
-        tempx = [];
-        for (x = minX; x <= maxX; x += iterate) {
-          z = parseFloat(parseFloat(math.eval(((equation).replace(new RegExp("x", 'g'), "(" + x + ")").replace(new RegExp("y", 'g'), "(" + y + ")")))).toFixed(3));
-          if ((z <= maxZ) && (z >= minZ)) {
-            tempx.push(x);
-            tempy.push(y);
-            tempz.push(eval(equation));
-          } else {
-            tempx.push(null);
-            tempy.push(null);
-            tempz.push(null);
-          }
-        }
-        //dumb = false;
-        x1.push(tempx);
-        y1.push(tempy);
-        z1.push(tempz);
-      }
-    } else {
+//     parametric = document.getElementById('parametric').checked;
+//     if (!parametric) {
+//       equation = document.getElementById('equation').value;
+//       minX = parseFloat(document.getElementById("minX").value);
+//       maxX = parseFloat(document.getElementById("maxX").value);
+//       minY = parseFloat(document.getElementById("minY").value);
+//       maxY = parseFloat(document.getElementById("maxY").value);
+//       minZ = parseFloat(document.getElementById("minZ").value);
+//       maxZ = parseFloat(document.getElementById("maxZ").value);
+//       iterate = parseFloat(document.getElementById("iterate").value);
+//       for (y = minY; y <= maxY; y += iterate) {
+//         tempz = [];
+//         tempy = [];
+//         tempx = [];
+//         for (x = minX; x <= maxX; x += iterate) {
+//           z = parseFloat(parseFloat(math.eval(((equation).replace(new RegExp("x", 'g'), "(" + x + ")").replace(new RegExp("y", 'g'), "(" + y + ")")))).toFixed(3));
+//           if ((z <= maxZ) && (z >= minZ)) {
+//             tempx.push(x);
+//             tempy.push(y);
+//             tempz.push(eval(equation));
+//           } else {
+//             tempx.push(null);
+//             tempy.push(null);
+//             tempz.push(null);
+//           }
+//         }
+//         //dumb = false;
+//         x1.push(tempx);
+//         y1.push(tempy);
+//         z1.push(tempz);
+//       }
+//     } else {
       console.log("dumb");
       equationx = "cos(p)*" + document.getElementById('equation').value;
       equationx = equationx.replace(new RegExp("x", 'g'), "t");
@@ -272,7 +272,7 @@ var SoR = {
         x1.push(tempx);
         y1.push(tempy);
         z1.push(tempz);
-      }
+      //}
     }
     op = document.getElementById('opacity').value;
     lowCol = document.getElementById('lowCol').value;
