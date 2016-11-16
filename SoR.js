@@ -2,18 +2,18 @@ var SoR = {
   tempYArr: [],
   size: 500,
 
-  function evaluateEquation(x, equationToEval) {
+  evaluateEquation: function(x, equationToEval) {
     return parseFloat(parseFloat(math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")))).toFixed(3));
   },
 
-  function storyYVals() {
+  storeYVals: function() {
     for (var i = 0; i <= SoR.size * (b - a); i++) {
-      SoR.tempYArr.push(evaluateEquation(xVal, equationToEval));
+      SoR.tempYArr.push(SoR.evaluateEquation(xVal, equationToEval));
       xVal = xVal - (1 / SoR.size);
     }
   },
 
-  function integral() {
+  integral: function() {
     var equationToEval = "3.14159265*(" + document.getElementById('equation').value + ")^2";
     var integralValue = 0;
     var N = parseInt($('#rectangles').val());
@@ -92,7 +92,7 @@ var SoR = {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   },
 
-  function surfaceArea() {
+  surfaceArea: function() {
     var equationToEval = "2*3.14159265*(" + document.getElementById('equation').value + ")";
     var integralValue = 0;
     var N = parseInt($('#rectangles').val());
@@ -103,7 +103,7 @@ var SoR = {
     var prevYVal = 0;
     var count = SoR.size * (b - a) - 1;
     for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
-      tempY = (((SoR.tempYArr[count] + evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
+      tempY = (((SoR.tempYArr[count] + SoR.evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
@@ -132,7 +132,7 @@ var SoR = {
     count = 0;
     if (integralValue != "diverges") {
       for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
-        tempY = (((SoR.tempYArr[count] + evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
+        tempY = (((SoR.tempYArr[count] + SoR.evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
 
         // temporary += parseFloat(tempY.toFixed(6));
         // xVal = xVal + (1 / SoR.size);
@@ -171,7 +171,7 @@ var SoR = {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   },
 
-  function changeInputs() {
+  changeInputs: function() {
     parametric = document.getElementById('parametric').checked;
     console.log(parametric)
     if (parametric) {
@@ -183,12 +183,13 @@ var SoR = {
     }
   },
 
-  function RenderEquations(e) {
+  RenderEquations: function(e) {
     equationToEval = document.getElementById('equation').value;
     MathJax.Hub.Queue(["Text", MathJax.Hub.getAllJax(document.getElementById('equationFormatShown'))[0], 'f(x)=' + equationToEval]);
   },
 
-  function drawGraph() {
+  drawGraph: function() {
+    SoR.storeYVals();
     z1 = [];
     y1 = [];
     x1 = [];
@@ -279,7 +280,7 @@ var SoR = {
       ]
     };
     Plotly.newPlot('tester', [data_z1]);
-    integral();
-    surfaceArea();
+    SoR.integral();
+    SoR.surfaceArea();
   }
 }
