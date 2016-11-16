@@ -1,7 +1,7 @@
 var SoR = {
   tempYArr1: [],
   tempYArr2: [],
-  size: 500,
+  size: 300,
 
   evaluateEquation: function(x, equationToEval) {
     return parseFloat(parseFloat(math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")))).toFixed(3));
@@ -26,7 +26,7 @@ var SoR = {
   },
 
   integral: function() {
-    var equationToEval = "3.14159265*(" + document.getElementById('equation').value + ")^2";
+    var equationToEval = "pi*(" + document.getElementById('equation').value + ")^2";
     var integralValue = 0;
     var N = parseInt($('#rectangles').val());
     var a = parseInt($('#minX').val());
@@ -105,7 +105,7 @@ var SoR = {
   },
 
   surfaceArea: function() {
-    var equationToEval = "2*3.14159265*(" + document.getElementById('equation').value + ")";
+    var equationToEval = "2*pi*(" + document.getElementById('equation').value + ")";
     var integralValue = 0;
     var N = parseInt($('#rectangles').val());
     var a = parseInt($('#minX').val());
