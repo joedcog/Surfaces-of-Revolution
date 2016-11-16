@@ -15,12 +15,12 @@
     <div style="text-align:center">
         <label class="equation" id="eqLab" for="equation">f(x,y) = z =</label>
         <label class="equation" id="eqLab1" for="equation" style="display:none;">f(x) = </label>
-        <input class="equation" id="equation" type="text" oninput="RenderEquations()"/>
+        <input class="equation" id="equation" type="text" oninput="SoR.RenderEquations()"/>
         <div id='equationFormatShown'>
             ``
         </div>
         <div>
-            <input id="parametric" type="checkbox" onclick="changeInputs()" />
+            <input id="parametric" type="checkbox" onclick="SoR.changeInputs()" />
             <label for="parametric">Rotate Around Axis</label>
         </div>
         <div>
@@ -57,7 +57,7 @@
             <label for="opacity">Opacity:</label>
             <input id="opacity" type="text" value="1" />
         </div>
-        <button id="draw" onclick="drawGraph();">Draw</button>
+        <button id="draw" onclick="SoR.drawGraph();">Draw</button>
     </div>
     <div id="tester" style="width:75%;height:600px "></div>
     <p id="integral"></p>
