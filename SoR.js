@@ -7,6 +7,8 @@ var SoR = {
   },
 
   storeYVals: function() {
+    var a = parseInt($('#minX').val());
+    var b = parseInt($('#maxX').val());
     for (var i = 0; i <= SoR.size * (b - a); i++) {
       SoR.tempYArr.push(SoR.evaluateEquation(xVal, equationToEval));
       xVal = xVal - (1 / SoR.size);
