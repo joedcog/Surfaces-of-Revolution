@@ -1,14 +1,15 @@
 var SoR = {
   tempYArr: [],
+  size: 500,
 
   function evaluateEquation(x, equationToEval) {
     return parseFloat(parseFloat(math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")))).toFixed(3));
   },
 
   function storyYVals() {
-    for (var i = 0; i <= size * (b - a); i++) {
+    for (var i = 0; i <= SoR.size * (b - a); i++) {
       SoR.tempYArr.push(evaluateEquation(xVal, equationToEval));
-      xVal = xVal - (1 / size);
+      xVal = xVal - (1 / SoR.size);
     }
   },
 
@@ -19,19 +20,18 @@ var SoR = {
     var a = parseInt($('#minX').val());
     var b = parseInt($('#maxX').val());
     var xVal = b;
-    var size = 500;
     var tempY = 0;
-    var count = size * (b - a);
+    var count = SoR.size * (b - a);
     var prevYVal = 0;
-    for (var i = 0; i < size * (b - a); i++) {
-      tempY = SoR.tempYArr[count] * (1 / size);
+    for (var i = 0; i < SoR.size * (b - a); i++) {
+      tempY = SoR.tempYArr[count] * (1 / SoR.size);
       // integralValue += parseFloat(tempY.toFixed(6));
-      // xVal = xVal - (1 / size);
+      // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
         if (!isFinite(tempY)) {
           //integralValue = "diverges";
           break;
-        } else if (Math.abs((tempY - prevYVal) / (1 / size)) >= 999999) {
+        } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
           integralValue = "diverges";
           break;
         } else {
@@ -42,7 +42,7 @@ var SoR = {
           integralValue += parseFloat(tempY.toFixed(6));
         }
       }
-      xVal = xVal - (1 / size);
+      xVal = xVal - (1 / SoR.size);
       prevYVal = tempY;
       count--;
     }
@@ -52,16 +52,16 @@ var SoR = {
     count = 0;
     xVal = a;
     if (integralValue != "diverges") {
-      for (var i = 0; i < size * (b - a); i++) {
-        tempY = SoR.tempYArr[count] * (1 / size);
+      for (var i = 0; i < SoR.size * (b - a); i++) {
+        tempY = SoR.tempYArr[count] * (1 / SoR.size);
 
         // temporary += parseFloat(tempY.toFixed(6));
-        // xVal = xVal + (1 / size);
+        // xVal = xVal + (1 / SoR.size);
         if (i > 0) {
           if (!isFinite(tempY)) {
             //integralValue = "diverges";
             break;
-          } else if (Math.abs((tempY - prevYVal) / (1 / size)) >= 999999) {
+          } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
             integralValue = "diverges";
             break;
           } else {
@@ -72,7 +72,7 @@ var SoR = {
             temporary += parseFloat(tempY.toFixed(6));
           }
         }
-        xVal = xVal + (1 / size);
+        xVal = xVal + (1 / SoR.size);
         prevYVal = tempY;
         count++;
       }
@@ -99,19 +99,18 @@ var SoR = {
     var a = parseInt($('#minX').val());
     var b = parseInt($('#maxX').val());
     var xVal = b;
-    var size = 500;
     var tempY = 0;
     var prevYVal = 0;
-    var count = size * (b - a) - 1;
-    for (var i = 0; i < size * (b - a) - 1; i++) {
-      tempY = (((SoR.tempYArr[count] + evaluateEquation(xVal - (1 / size), equationToEval)) / 2) * (1 / size));
+    var count = SoR.size * (b - a) - 1;
+    for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
+      tempY = (((SoR.tempYArr[count] + evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
       // integralValue += parseFloat(tempY.toFixed(6));
-      // xVal = xVal - (1 / size);
+      // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
         if (!isFinite(tempY)) {
           //integralValue = "diverges";
           break;
-        } else if (Math.abs((tempY - prevYVal) / (1 / size)) >= 999999) {
+        } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
           integralValue = "diverges";
           break;
         } else {
@@ -122,7 +121,7 @@ var SoR = {
           integralValue += parseFloat(tempY.toFixed(6));
         }
       }
-      xVal = xVal - (1 / size);
+      xVal = xVal - (1 / SoR.size);
       prevYVal = tempY;
       count--;
     }
@@ -132,16 +131,16 @@ var SoR = {
     xVal = a;
     count = 0;
     if (integralValue != "diverges") {
-      for (var i = 0; i < size * (b - a) - 1; i++) {
-        tempY = (((SoR.tempYArr[count] + evaluateEquation(xVal + (1 / size), equationToEval)) / 2) * (1 / size))
+      for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
+        tempY = (((SoR.tempYArr[count] + evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
 
         // temporary += parseFloat(tempY.toFixed(6));
-        // xVal = xVal + (1 / size);
+        // xVal = xVal + (1 / SoR.size);
         if (i > 0) {
           if (!isFinite(tempY)) {
             //integralValue = "diverges";
             break;
-          } else if (Math.abs((tempY - prevYVal) / (1 / size)) >= 999999) {
+          } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
             integralValue = "diverges";
             break;
           } else {
@@ -152,7 +151,7 @@ var SoR = {
             temporary += parseFloat(tempY.toFixed(6));
           }
         }
-        xVal = xVal + (1 / size);
+        xVal = xVal + (1 / SoR.size);
         prevYVal = tempY;
         count++;
       }
