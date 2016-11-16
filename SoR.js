@@ -35,7 +35,6 @@ var SoR = {
     var prevYVal = 0;
     for (var i = 0; i < SoR.size * (b - a); i++) {
       tempY = 3.14159265* Math.pow(SoR.tempYArr2[count],2) * (1 / SoR.size);
-      (evaluateEquation(xVal, equationToEval) * (1 / size));
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
