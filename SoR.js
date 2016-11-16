@@ -8,6 +8,8 @@ var SoR = {
   },
 
   storeYVals: function() {
+    SoR.tempYArr1.length = 0;
+    SoR.tempYArr2.length = 0;
     var a = parseInt($('#minX').val());
     var b = parseInt($('#maxX').val());
     var xVal = a;
@@ -15,7 +17,7 @@ var SoR = {
       SoR.tempYArr1.push(SoR.evaluateEquation(xVal, equationToEval));
       xVal = xVal + (1 / SoR.size);
     }
-    var xVal = a;
+    var xVal = b;
     for (var i = 0; i <= SoR.size * (b - a); i++) {
       SoR.tempYArr2.push(SoR.evaluateEquation(xVal, equationToEval));
       xVal = xVal - (1 / SoR.size);
