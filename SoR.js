@@ -173,7 +173,7 @@ var SoR = {
 //     }
     console.log(integralValue + "    " + temporary);
     if (integralValue != "diverges") {
-      integralValue = (integralValue + temporary) / 2;
+      //integralValue = (integralValue + temporary) / 2;
       integralValue = parseFloat(integralValue.toFixed(3));
     }
     MathJax.Hub.Queue(function() {
