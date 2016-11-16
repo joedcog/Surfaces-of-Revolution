@@ -1,7 +1,7 @@
 var SoR = {
   tempYArr1: [],
   tempYArr2: [],
-  size: 300,
+  size: 400,
 
   evaluateEquation: function(x, equationToEval) {
     return parseFloat(parseFloat(math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")))).toFixed(3));
@@ -96,9 +96,9 @@ var SoR = {
     }
     MathJax.Hub.Queue(function() {
       if (integralValue != "diverges") {
-        $('#integral').empty().append("Volume: `int_(" + a + ")^(" + b + ")" + equationToEval + " dx = " + integralValue + "`");
+        $('#integral').empty().append("Volume: `int_(" + a + ")^(" + b + ")" + equationToEval + " dx approx " + integralValue + "`");
       } else {
-        $('#integral').empty().append("Volume: `int_(" + a + ")^(" + b + ")" + equationToEval + " = " + integralValue + "`");
+        $('#integral').empty().append("Volume: " + integralValue);
       }
     });
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
@@ -117,9 +117,10 @@ var SoR = {
     for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
       //tempY = (((SoR.tempYArr2[count] + SoR.evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
       //tempY = Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2)));
-      tempY = 3.14159265359*(SoR.tempYArr2[count+1]+SoR.tempYArr2[count])*(Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2))));
+      tempY = Math.abs(3.14159265359*(SoR.tempYArr2[count+1]+SoR.tempYArr2[count])*(Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2)))));
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
+      
       if (i > 0) {
         if (!isFinite(tempY)) {
           //integralValue = "diverges";
@@ -178,7 +179,7 @@ var SoR = {
     }
     MathJax.Hub.Queue(function() {
       if (integralValue != "diverges") {
-        $('#surfaceArea').empty().append("Surface Area: `int_(" + a + ")^(" + b + ")" + equationToEval + "* sqrt(1+((dy)/(dx))^2) dx = " + integralValue + "`");
+        $('#surfaceArea').empty().append("Surface Area: `int_(" + a + ")^(" + b + ")" + equationToEval + "* sqrt(1+((dy)/(dx))^2) dx approx " + integralValue + "`");
       } else {
         $('#surfaceArea').empty().append("Surface Area: " + integralValue);
       }
