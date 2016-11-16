@@ -8,8 +8,7 @@ var SoR = {
   },
 
   storeYVals: function() {
-    SoR.tempYArr1.length = 0;
-    SoR.tempYArr2.length = 0;
+    var equationToEval = document.getElementById('equation').value;
     var a = parseInt($('#minX').val());
     var b = parseInt($('#maxX').val());
     var xVal = a;
@@ -35,9 +34,8 @@ var SoR = {
     var count = 0;
     var prevYVal = 0;
     for (var i = 0; i < SoR.size * (b - a); i++) {
-      tempY = SoR.tempYArr2[count] * (1 / SoR.size);
-      console.log(SoR.evaluateEquation(xVal, equationToEval) * (1 / size));
-      console.log("tempY" + tempY);
+      tempY = 3.14159265* Math.pow(SoR.tempYArr2[count],2) * (1 / SoR.size);
+      (evaluateEquation(xVal, equationToEval) * (1 / size));
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
@@ -66,7 +64,7 @@ var SoR = {
     xVal = a;
     if (integralValue != "diverges") {
       for (var i = 0; i < SoR.size * (b - a); i++) {
-        tempY = SoR.tempYArr1[count] * (1 / SoR.size);
+        tempY = 3.14159265* Math.pow(SoR.tempYArr1[count],2) * (1 / SoR.size);
 
         // temporary += parseFloat(tempY.toFixed(6));
         // xVal = xVal + (1 / SoR.size);
