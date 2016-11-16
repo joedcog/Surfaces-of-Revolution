@@ -36,7 +36,7 @@ var SoR = {
     var count = 0;
     var prevYVal = 0;
     for (var i = 0; i < SoR.size * (b - a); i++) {
-      tempY = 3.14159265* Math.pow(SoR.tempYArr2[count],2) * (1 / SoR.size);
+      tempY = 3.14159265359* Math.pow(SoR.tempYArr2[count],2) * (1 / SoR.size);
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
@@ -65,7 +65,7 @@ var SoR = {
     xVal = a;
     if (integralValue != "diverges") {
       for (var i = 0; i < SoR.size * (b - a); i++) {
-        tempY = 3.14159265* Math.pow(SoR.tempYArr1[count],2) * (1 / SoR.size);
+        tempY = 3.14159265359* Math.pow(SoR.tempYArr1[count],2) * (1 / SoR.size);
 
         // temporary += parseFloat(tempY.toFixed(6));
         // xVal = xVal + (1 / SoR.size);
@@ -117,7 +117,7 @@ var SoR = {
     for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
       //tempY = (((SoR.tempYArr2[count] + SoR.evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
       //tempY = Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2)));
-      tempY = 3.14159265*(SoR.tempYArr2[count+1]+SoR.tempYArr2[count])*(Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2))));
+      tempY = 3.14159265359*(SoR.tempYArr2[count+1]+SoR.tempYArr2[count])*(Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2))));
       // integralValue += parseFloat(tempY.toFixed(6));
       // xVal = xVal - (1 / SoR.size);
       if (i > 0) {
@@ -144,33 +144,33 @@ var SoR = {
     var temporary = 0;
     xVal = a;
     count = 0;
-    if (integralValue != "diverges") {
-      for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
-        //tempY = (((SoR.tempYArr1[count] + SoR.evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
-        //tempY = Math.sqrt(Math.pow(SoR.tempYArr1[count+1]-SoR.tempYArr1[count],2)+(1 / Math.pow(SoR.size,2)));
-                tempY = 3.14159265*(SoR.tempYArr1[count+1]+SoR.tempYArr1[count])*Math.sqrt(Math.pow(SoR.tempYArr1[count+1]-SoR.tempYArr1[count],2)+(1 / Math.pow(SoR.size,2)));
-        // temporary += parseFloat(tempY.toFixed(6));
-        // xVal = xVal + (1 / SoR.size);
-        if (i > 0) {
-          if (!isFinite(tempY)) {
-            //integralValue = "diverges";
-            break;
-          } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
-            integralValue = "diverges";
-            break;
-          } else {
-            temporary += parseFloat(tempY.toFixed(6));
-          }
-        } else {
-          if (isFinite(tempY) && !isNaN(tempY)) {
-            temporary += parseFloat(tempY.toFixed(6));
-          }
-        }
-        xVal = xVal + (1 / SoR.size);
-        prevYVal = tempY;
-        count++;
-      }
-    }
+//     if (integralValue != "diverges") {
+//       for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
+//         //tempY = (((SoR.tempYArr1[count] + SoR.evaluateEquation(xVal + (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size))
+//         //tempY = Math.sqrt(Math.pow(SoR.tempYArr1[count+1]-SoR.tempYArr1[count],2)+(1 / Math.pow(SoR.size,2)));
+//         tempY = 3.14159265*(SoR.tempYArr1[count+1]+SoR.tempYArr1[count])*Math.sqrt(Math.pow(SoR.tempYArr1[count+1]-SoR.tempYArr1[count],2)+(1 / Math.pow(SoR.size,2)));
+//         // temporary += parseFloat(tempY.toFixed(6));
+//         // xVal = xVal + (1 / SoR.size);
+//         if (i > 0) {
+//           if (!isFinite(tempY)) {
+//             //integralValue = "diverges";
+//             break;
+//           } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
+//             integralValue = "diverges";
+//             break;
+//           } else {
+//             temporary += parseFloat(tempY.toFixed(6));
+//           }
+//         } else {
+//           if (isFinite(tempY) && !isNaN(tempY)) {
+//             temporary += parseFloat(tempY.toFixed(6));
+//           }
+//         }
+//         xVal = xVal + (1 / SoR.size);
+//         prevYVal = tempY;
+//         count++;
+//       }
+//     }
     console.log(integralValue + "    " + temporary);
     if (integralValue != "diverges") {
       integralValue = (integralValue + temporary) / 2;
@@ -178,9 +178,9 @@ var SoR = {
     }
     MathJax.Hub.Queue(function() {
       if (integralValue != "diverges") {
-        $('#surfaceArea').empty().append("Surface Area: `int_(" + a + ")^(" + b + ")" + equationToEval + " dx = " + integralValue + "`");
+        $('#surfaceArea').empty().append("Surface Area: `int_(" + a + ")^(" + b + ")" + equationToEval + "* sqrt(1+((dy)/(dx))^2) dx = " + integralValue + "`");
       } else {
-        $('#surfaceArea').empty().append("Surface Area: `int_(" + a + ")^(" + b + ")" + equationToEval + " = " + integralValue + "`");
+        $('#surfaceArea').empty().append("Surface Area: " + integralValue);
       }
     });
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
