@@ -255,7 +255,7 @@ var SoR = {
       minZ = parseFloat(document.getElementById("minZ").value);
       maxZ = parseFloat(document.getElementById("maxZ").value);
       iterate = parseFloat(document.getElementById("iterate").value);
-      for (ppp = minY; ppp <= maxY; ppp += iterate) {
+      for (p = minY; p <= maxY; p += iterate) {
         tempz = [];
         tempy = [];
         tempx = [];
