@@ -242,12 +242,12 @@ var SoR = {
 //       }
 //     } else {
       console.log("dumb");
-      equationx = "cos(p)*" + document.getElementById('equation').value;
-      equationx = equationx.replace(new RegExp("x", 'g'), "t");
-      equationy = "t";
-      equationy = equationy.replace(new RegExp("x", 'g'), "t");
-      equationz = "sin(p)*" + document.getElementById('equation').value;
-      equationz = equationz.replace(new RegExp("x", 'g'), "t");
+      equationx = "cos(_p_)*" + document.getElementById('equation').value;
+      equationx = equationx.replace(new RegExp("x", 'g'), "_t_");
+      equationy = "_t_";
+      equationy = equationy.replace(new RegExp("x", 'g'), "_t_");
+      equationz = "sin(_p_)*" + document.getElementById('equation').value;
+      equationz = equationz.replace(new RegExp("x", 'g'), "_t_");
       minX = parseFloat(document.getElementById("minX").value);
       maxX = parseFloat(document.getElementById("maxX").value);
       minY = parseFloat(document.getElementById("minY").value);
@@ -255,17 +255,17 @@ var SoR = {
       minZ = parseFloat(document.getElementById("minZ").value);
       maxZ = parseFloat(document.getElementById("maxZ").value);
       iterate = parseFloat(document.getElementById("iterate").value);
-      for (p = minY; p <= maxY; p += iterate) {
+      for (ppp = minY; ppp <= maxY; ppp += iterate) {
         tempz = [];
         tempy = [];
         tempx = [];
         for (t = minX; t <= maxX; t += iterate) {
-          temptempz = parseFloat(parseFloat(math.eval(((equationz).replace(new RegExp("p", 'g'), "(" + p + ")").replace(new RegExp("t", 'g'), "(" + t + ")")))).toFixed(2));
+          temptempz = parseFloat(parseFloat(math.eval(((equationz).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
           if (temptempz <= maxZ || temptempz >= minZ) {
             //if ((z <= maxZ) && (z >= minZ)) {
-            tempx.push(parseFloat(math.eval(((equationx).replace(new RegExp("p", 'g'), "(" + p + ")").replace(new RegExp("t", 'g'), "(" + t + ")")))).toFixed(2));
-            tempy.push(parseFloat(math.eval(((equationy).replace(new RegExp("p", 'g'), "(" + p + ")").replace(new RegExp("t", 'g'), "(" + t + ")")))).toFixed(2));
-            tempz.push(parseFloat(math.eval(((equationz).replace(new RegExp("p", 'g'), "(" + p + ")").replace(new RegExp("t", 'g'), "(" + t + ")")))).toFixed(2));
+            tempx.push(parseFloat(math.eval(((equationx).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
+            tempy.push(parseFloat(math.eval(((equationy).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
+            tempz.push(parseFloat(math.eval(((equationz).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
           } else {
             tempx.push(null);
             tempy.push(null);
