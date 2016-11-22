@@ -1,23 +1,29 @@
 var SoR = {
-    tempYArr1: [],
+    //tempYArr1: [],
     tempYArr2: [],
-    size: 400,
+    size: 200,
 
     evaluateEquation: function(x, equationToEval) {
-        return parseFloat(parseFloat(math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")))).toFixed(3));
+        var a = math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")));
+        if(!isNaN(a)){
+          return parseFloat(parseFloat(math.eval(((equationToEval).replace(new RegExp("x", 'g'), "(" + x + ")")))).toFixed(3));
+        }
+        else{
+          return null
+        }
     },
 
     storeYVals: function() {
         var equationToEval = document.getElementById('equation').value;
         var a = parseInt($('#minX').val());
         var b = parseInt($('#maxX').val());
-        SoR.tempYArr1 = [];
+        //SoR.tempYArr1 = [];
         SoR.tempYArr2 = [];
-        var xVal = a;
-        for (var i = 0; i <= SoR.size * (b - a); i++) {
-            SoR.tempYArr1.push(SoR.evaluateEquation(xVal, equationToEval));
-            xVal = xVal + (1 / SoR.size);
-        }
+        //var xVal = a;
+        // for (var i = 0; i <= SoR.size * (b - a); i++) {
+        //     SoR.tempYArr1.push(SoR.evaluateEquation(xVal, equationToEval));
+        //     xVal = xVal + (1 / SoR.size);
+        // }
         var xVal = b;
         for (var i = 0; i <= SoR.size * (b - a); i++) {
             SoR.tempYArr2.push(SoR.evaluateEquation(xVal, equationToEval));
@@ -36,7 +42,8 @@ var SoR = {
         var count = 0;
         var prevYVal = 0;
         for (var i = 0; i < SoR.size * (b - a); i++) {
-            tempY = 3.14159265359 * Math.pow(SoR.tempYArr2[count], 2) * (1 / SoR.size);
+            //tempY = 3.14159265359 * Math.pow(SoR.tempYArr2[count], 2) * (1 / SoR.size);
+            tempY = (1/3)*3.14159265359*(1/SoR.size)*(Math.pow(SoR.tempYArr2[count],2) + SoR.tempYArr2[count]*SoR.tempYArr2[count+1] + Math.pow(SoR.tempYArr2[count+1],2));
             // integralValue += parseFloat(tempY.toFixed(6));
             // xVal = xVal - (1 / SoR.size);
             if (i > 0) {
@@ -59,39 +66,39 @@ var SoR = {
             count++;
         }
         tempY = 0;
-        var prevYVal = 0;
-        var temporary = 0;
-        count = 0;
-        xVal = a;
-        if (integralValue != "diverges") {
-            for (var i = 0; i < SoR.size * (b - a); i++) {
-                tempY = 3.14159265359 * Math.pow(SoR.tempYArr1[count], 2) * (1 / SoR.size);
+        // var prevYVal = 0;
+        // var temporary = 0;
+        // count = 0;
+        // xVal = a;
+        // if (integralValue != "diverges") {
+        //     for (var i = 0; i < SoR.size * (b - a); i++) {
+        //         tempY = 3.14159265359 * Math.pow(SoR.tempYArr1[count], 2) * (1 / SoR.size);
 
-                // temporary += parseFloat(tempY.toFixed(6));
-                // xVal = xVal + (1 / SoR.size);
-                if (i > 0) {
-                    if (!isFinite(tempY)) {
-                        //integralValue = "diverges";
-                        break;
-                    } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
-                        integralValue = "diverges";
-                        break;
-                    } else {
-                        temporary += parseFloat(tempY.toFixed(6));
-                    }
-                } else {
-                    if (isFinite(tempY) && !isNaN(tempY)) {
-                        temporary += parseFloat(tempY.toFixed(6));
-                    }
-                }
-                xVal = xVal + (1 / SoR.size);
-                prevYVal = tempY;
-                count++;
-            }
-        }
-        console.log(integralValue + "    " + temporary);
+        //         // temporary += parseFloat(tempY.toFixed(6));
+        //         // xVal = xVal + (1 / SoR.size);
+        //         if (i > 0) {
+        //             if (!isFinite(tempY)) {
+        //                 //integralValue = "diverges";
+        //                 break;
+        //             } else if (Math.abs((tempY - prevYVal) / (1 / SoR.size)) >= 999999) {
+        //                 integralValue = "diverges";
+        //                 break;
+        //             } else {
+        //                 temporary += parseFloat(tempY.toFixed(6));
+        //             }
+        //         } else {
+        //             if (isFinite(tempY) && !isNaN(tempY)) {
+        //                 temporary += parseFloat(tempY.toFixed(6));
+        //             }
+        //         }
+        //         xVal = xVal + (1 / SoR.size);
+        //         prevYVal = tempY;
+        //         count++;
+        //     }
+        // }
+        //console.log(integralValue + "    " + temporary);
         if (integralValue != "diverges") {
-            integralValue = (integralValue + temporary) / 2;
+            //integralValue = (integralValue + temporary) / 2;
             integralValue = parseFloat(integralValue.toFixed(3));
         }
         MathJax.Hub.Queue(function() {
@@ -114,13 +121,13 @@ var SoR = {
         var tempY = 0;
         var prevYVal = 0;
         var count = 0;
-        for (var i = 0; i < SoR.size * (b - a) - 1; i++) {
+        for (var i = 0; i < SoR.size * (b - a); i++) {
             //tempY = (((SoR.tempYArr2[count] + SoR.evaluateEquation(xVal - (1 / SoR.size), equationToEval)) / 2) * (1 / SoR.size));
             //tempY = Math.sqrt(Math.pow(SoR.tempYArr2[count+1]-SoR.tempYArr2[count],2)+(1 / Math.pow(SoR.size,2)));
             tempY = Math.abs(3.14159265359 * (SoR.tempYArr2[count + 1] + SoR.tempYArr2[count]) * (Math.sqrt(Math.pow(SoR.tempYArr2[count + 1] - SoR.tempYArr2[count], 2) + (1 / Math.pow(SoR.size, 2)))));
             // integralValue += parseFloat(tempY.toFixed(6));
             // xVal = xVal - (1 / SoR.size);
-
+            //console.log(tempY);
             if (i > 0) {
                 if (!isFinite(tempY)) {
                     //integralValue = "diverges";
@@ -136,10 +143,12 @@ var SoR = {
                     integralValue += parseFloat(tempY.toFixed(6));
                 }
             }
-            xVal = xVal - (1 / SoR.size);
+            //xVal = xVal - (1 / SoR.size);
             prevYVal = tempY;
             count++;
         }
+
+        //console.log(integralValue);
         tempY = 0;
         var prevYVal = 0;
         var temporary = 0;
@@ -172,7 +181,7 @@ var SoR = {
         //         count++;
         //       }
         //     }
-        console.log(integralValue + "    " + temporary);
+        //console.log(integralValue + "    " + temporary);
         if (integralValue != "diverges") {
             //integralValue = (integralValue + temporary) / 2;
             integralValue = parseFloat(integralValue.toFixed(3));
@@ -245,7 +254,7 @@ var SoR = {
         equationx = "cos(_p_)*" + document.getElementById('equation').value;
         equationx = equationx.replace(new RegExp("x", 'g'), "_t_");
         equationy = "_t_";
-        equationy = equationy.replace(new RegExp("x", 'g'), "_t_");
+        //equationy = equationy.replace(new RegExp("x", 'g'), "_t_");
         equationz = "sin(_p_)*" + document.getElementById('equation').value;
         equationz = equationz.replace(new RegExp("x", 'g'), "_t_");
         minX = parseFloat(document.getElementById("minX").value);
@@ -260,12 +269,19 @@ var SoR = {
             tempy = [];
             tempx = [];
             for (t = minX; t <= maxX; t += iterate) {
-                temptempz = parseFloat(parseFloat(math.eval(((equationz).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
-                if ((temptempz <= maxZ || temptempz >= minZ) && !isNaN(temptempz)) {
+                //temptempz = parseFloat(parseFloat(math.eval(((equationz).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
+                // if (temptempz <= maxZ || temptempz >= minZ) {
                     //if ((z <= maxZ) && (z >= minZ)) {
-                    tempx.push(parseFloat(math.eval(((equationx).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
-                    tempy.push(parseFloat(math.eval(((equationy).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
-                    tempz.push(parseFloat(math.eval(((equationz).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")))).toFixed(2));
+                    xtemp = math.eval(((equationx).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")));
+                    //ytemp = math.eval(((equationy).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")));
+                    ytemp = t;
+                    ztemp = math.eval(((equationz).replace(new RegExp("_p_", 'g'), "(" + p + ")").replace(new RegExp("_t_", 'g'), "(" + t + ")")));
+                    //console.log(xtemp + '   ' + ytemp + '   ' + ztemp);
+                if(!isNaN(xtemp) && !isNaN(ytemp) && !isNaN(ztemp) && (ztemp <= maxZ || ztemp >= minZ) ){
+                  tempx.push(parseFloat(xtemp).toFixed(2));
+                  tempy.push(parseFloat(ytemp).toFixed(2));
+                  tempz.push(parseFloat(ztemp).toFixed(2));
+                // }
                 } else {
                     tempx.push(null);
                     tempy.push(null);
@@ -282,7 +298,7 @@ var SoR = {
         lowCol = document.getElementById('lowCol').value;
         midCol = document.getElementById('midCol').value;
         maxCol = document.getElementById('maxCol').value;
-        console.log(lowCol);
+        //console.log(lowCol);
         var data_z1 = {
             x: x1,
             y: y1,
